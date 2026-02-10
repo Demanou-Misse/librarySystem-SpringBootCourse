@@ -1,0 +1,35 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/demo_db
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 2468BbjbB
+
+  jpa:
+    hibernate:
+      ddl-auto: validate   # ne modifie pas la base en prod
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  port: 8080
+
+# Swagger désactivé en prod pour sécurité
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+# Logging prod moins verbeux
+logging:
+  level:
+    root: WARN
+    org.springframework: INFO

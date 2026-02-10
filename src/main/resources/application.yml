@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: library-system-api
+  profiles:
+    active: dev
+
+  # Multipart file upload limits (Enterprise Standard 2026)
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 10MB
+      enabled: true
+
+  # H2 Console configuration
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+# Moving these out of the 'spring' block to the root level
+server:
+  port: 8080
+
+# Aligned with JwtServiceImpl @Value annotations
+application:
+  security:
+    jwt:
+      secret-key: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+      expiration: 86400000
+
+# Swagger / OpenAPI documentation
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+    tags-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+
+# Externalized storage paths for FileStorageService
+file:
+  upload-dir: ./library-storage
+  covers-sub-dir: covers
+  pdfs-sub-dir: pdfs
+
+logging:
+  level:
+    root: INFO
+    com.example.template: DEBUG
